@@ -629,6 +629,7 @@ class EnvBatch(EnvBase):
 
         submitargs = self.get_submit_args(case, job)
         args_override = self.get_value("BATCH_COMMAND_FLAGS", subgroup=job)
+
         if args_override:
             submitargs = args_override
 
@@ -706,6 +707,7 @@ class EnvBatch(EnvBase):
             sequence = (batchsubmit, submitargs, batchredirect, get_batch_script_for_job(job), run_args)
 
         submitcmd = " ".join(s.strip() for s in sequence if s is not None)
+
         if submitcmd.startswith("ssh"):
             # add ` before cd $CASEROOT and at end of command
             submitcmd = submitcmd.replace("cd $CASEROOT","\'cd $CASEROOT") + "\'"
