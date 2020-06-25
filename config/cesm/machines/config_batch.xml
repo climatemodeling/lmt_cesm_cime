@@ -111,13 +111,6 @@
     <batch_mail_flag>-u</batch_mail_flag>
     <batch_mail_type_flag></batch_mail_type_flag>
     <batch_mail_type></batch_mail_type>
-    <directives>
-      <directive                       > -J {{ job_id }} </directive>
-      <directive                       > -nnodes {{ total_tasks }} </directive>
-      <directive                       > -W $JOB_WALLCLOCK_TIME </directive>
-      <directive default="cesm.stdout" > -o {{ job_id }}.%J  </directive>
-      <directive default="cesm.stderr" > -e {{ job_id }}.%J  </directive>
-    </directives>
   </batch_system>
 
   <batch_system type="pbs" >
@@ -660,12 +653,13 @@
        <arg flag="-W" name="$JOB_WALLCLOCK_TIME"/>
        <arg flag="-P" name="$CHARGE_ACCOUNT"/>
      </submit_args>
+
      <directives>
-       <directive                       > -J {{ job_id }} </directive>
-       <directive                       > -nnodes {{ total_tasks }} </directive>
-       <directive                       > -W $JOB_WALLCLOCK_TIME </directive>
-       <directive default="cesm.stdout" > -o {{ job_id }}.%J  </directive>
-       <directive default="cesm.stderr" > -e {{ job_id }}.%J  </directive>
+       <directive> -J {{ job_id }} </directive>
+       <directive> -nnodes {{ num_nodes }} </directive>
+       <directive> -W $JOB_WALLCLOCK_TIME </directive>
+       <directive default="cesm.stdout"> -o {{ job_id }}.%J  </directive>
+       <directive default="cesm.stderr"> -e {{ job_id }}.%J  </directive>
      </directives>
 
      <directives>

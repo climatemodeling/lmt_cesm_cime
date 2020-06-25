@@ -203,6 +203,7 @@ class EnvBatch(EnvBase):
             overrides["job_id"] = overrides["job_id"][:15]
         overrides["batchdirectives"] = self.get_batch_directives(case, job, overrides=overrides)
         output_text = transform_vars(open(input_template,"r").read(), case=case, subgroup=job, overrides=overrides)
+
         output_name = get_batch_script_for_job(job) if outfile is None else outfile
         logger.info("Creating file {}".format(output_name))
         with open(output_name, "w") as fd:
@@ -363,6 +364,7 @@ class EnvBatch(EnvBase):
                             custom_prefix = self.get(node, "prefix")
                             prefix = directive_prefix if custom_prefix is None else custom_prefix
 
+                            print ('xxx', directive)
                             result.append("{}{}".format("" if not prefix else (prefix + " "), directive))
 
         return "\n".join(result)
